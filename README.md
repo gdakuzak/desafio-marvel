@@ -1,62 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# API Marvel
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img alt="Made by YahP" src="https://img.shields.io/badge/Laravel-8.12-ff2d20?style=for-the-badge&logo=laravel">
 </p>
 
-## About Laravel
+## 📚 Histórico
+Após os acontecimentos do Ultimato, na Terra 616, Tony Stark e Reed Richards estão tentando recuperar o sistema da Prisão 42. Stark acionou o Protocolo de Segurança J.A.R.V.I.S. para evitar problemas de segurança. Instruções estão nos próximos passos.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ⚠️ Pré-requisitos
+- PHP 7.4.3
+- Instalar os pacotes PHP:
+	- php7.4-cli
+	- php7.4-common
+	- php7.4-curl
+	- php7.4-gd
+	- php7.4-json
+	- php7.4-mbstring
+	- php7.4-mysql
+	- php7.4-opcache
+	- php7.4-readline
+	- php7.4-sqlite3
+	- php7.4-xml
+	- php7.4-zip
+- MariaDB ou MySQL
+- Nginx ou Apache (se for servidor)
+- Git
+- Composer
+- Linux
+	- Preferencia, porém se for em outro SO,  alguns comandso devem ser adaptados. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ⚙️ Instalação
+- Clone o repositorio e entre dentro da pasta:
+  ```
+  git clone git@github.com:gdakuzak/desafio-marvel.git
+  cd desafio-marvel
+  ```
+ - Instale os pacotes: ```composer install ```
+- Copie o ```.env.example``` para ```.env``` para executar o Laravel: 
+	- Linux: ```cp .env.example .env```
+- Crie a chave  aleatoria para executar o Laravel: ```php artisan key:generate```
+- Abra o ```.env``` e nos parametros abaixo, adicione os dados do banco de dados:
+  ```
+  DB_DATABASE=
+  DB_USERNAME=
+  DB_PASSWORD=
+  ```
+  <b>Importante 1:</b> se voce alterou a porta do banco de dados MySQL ou MariaDB para uma porta diferente da 3306, altere no parametro: ```DB_PORT```.
+  
+  <b>Importante 2:</b> Se voce não vai utilizar o banco de dados local ou tem outro servidor para banco de dados, altere no parametro: ```DB_HOST```. 
+ - <b>Passo Opcional:</b> Se deseja se conectar a Marvel para receber alguns dados de alguns personagens , voce deve seguir os passos no <a href="https://developer.marvel.com/docs#!/public/getCharacterIndividual_get_1">nesse link</a>, e pegar, pegar URL, chave publica e a chave privada. Caso não queira, adicionaremos os primeiros herois do Avenger #1 de 1961 no DB.
+	- Abra o arquivo ```.env``` e altere os parametros:
+      ```
+      MARVEL_URL=
+      MARVEL_PUBLIC=
+      MARVEL_PRIVATE=
+      ``` 
+- Execute o comando a seguir para criação das tabelas e importação dos dados: ```php artisan migrate --seed```
+- Para executar o servidor localmente, use: ```php artisan serve --port=8000```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+	<b>Importante:</b> Você poderá alterar a porta de acesso aos endpoints, porem não esqueça de mudar quando for acessar.
+### Acesso:
+Sem esses passos aqui, o J.A.R.V.I.S não deixará você passar:
+- No Postman ou qualquer outro software similar, utilize acesso o endpoint: ```/tokens/create``` passe o body:
+  ```json
+  {
+      "name": "Guilherme Dakuzaku",
+      "email": "gdakuzak@gmail.com.br"
+  }
+  ```
+ - Você receberá o retorno:
+    ```json
+    {
+        "email": "gdakuzak@gmail.com.br",
+        "token": "3|SJg8KcP1k1tuG8Cn83Ym6J9LkZnvMr7lh7lIMwyx"
+    }
+    ```
+  - Se o software que você usa tiver o meio de Autenticação Bearer, cole no campo o token. Se não tiver, coloque no header o campo ```Authorization``` e antes do token coloque ```Bearer + espaço```. Exemplo: ```Bearer 3|SJg8KcP1k1tuG8Cn83Ym6J9LkZnvMr7lh7lIMwyx```
+  - Não esqueça de todas as conexões terem no header ```Accept``` com o conteúdo: ```application/json```.
+  
 
-## Learning Laravel
+## Endpoints:
+Veja os endpoints na documentação específica:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<a href="https://documenter.getpostman.com/view/6554571/Tz5ndzEL"><img src="https://img.shields.io/badge/Veja%20no-Postman-ef5b25?style=for-the-badge&logo=postman"></a>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Sobre o Dev:
+Guilherme Makoto Sacoman Dakuzaku
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Contato: gdakuzak@gmail.com
