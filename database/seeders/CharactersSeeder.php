@@ -69,7 +69,7 @@ class CharactersSeeder extends Seeder
                                 ]);
                             }
 
-                            DB::table('characters_comics')->insert([
+                            DB::table('character_comic')->insert([
                                 'character_id' => $character_id,
                                 'comic_id' => $comic_id,
                                 'created_at' => now(),
@@ -93,7 +93,7 @@ class CharactersSeeder extends Seeder
                                 ]);
                             }
 
-                            DB::table('characters_series')->insert([
+                            DB::table('character_serie')->insert([
                                 'character_id' => $character_id,
                                 'serie_id' => $serie_id,
                                 'created_at' => now(),
@@ -117,7 +117,7 @@ class CharactersSeeder extends Seeder
                                 ]);
                             }
 
-                            DB::table('characters_events')->insert([
+                            DB::table('character_event')->insert([
                                 'character_id' => $character_id,
                                 'event_id' => $event_id,
                                 'created_at' => now(),
@@ -142,7 +142,7 @@ class CharactersSeeder extends Seeder
                                 ]);
                             }
 
-                            DB::table('characters_stories')->insert([
+                            DB::table('character_story')->insert([
                                 'character_id' => $character_id,
                                 'story_id' => $story_id,
                                 'created_at' => now(),
@@ -227,28 +227,28 @@ class CharactersSeeder extends Seeder
 
             foreach($chars as $char)
             {
-                DB::table('characters_comics')->insert([
+                DB::table('character_comic')->insert([
                     'character_id' => $char->id,
                     'comic_id' => 1,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                DB::table('characters_stories')->insert([
+                DB::table('character_story')->insert([
                     'character_id' => $char->id,
                     'story_id' => 1,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                DB::table('characters_series')->insert([
+                DB::table('character_serie')->insert([
                     'character_id' => $char->id,
                     'serie_id' => 1,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                DB::table('characters_events')->insert([
+                DB::table('character_event')->insert([
                     'character_id' => $char->id,
                     'event_id' => 1,
                     'created_at' => now(),

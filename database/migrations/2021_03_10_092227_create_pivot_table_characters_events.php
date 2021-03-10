@@ -13,7 +13,7 @@ class CreatePivotTableCharactersEvents extends Migration
      */
     public function up()
     {
-        Schema::create('characters_events', function (Blueprint $table) {
+        Schema::create('character_event', function (Blueprint $table) {
             $table->integer('character_id');
             $table->integer('event_id');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePivotTableCharactersEvents extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('characters_events');
+        Schema::dropIfExists('character_event');
     }
 }

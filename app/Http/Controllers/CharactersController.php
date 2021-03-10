@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Gdakuzak\Services\CharacterService;
 
 class CharactersController extends Controller
 {
+    public function __construct(CharacterService $characterService)
+    {
+        $this->characterService = $characterService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,9 +19,9 @@ class CharactersController extends Controller
      */
     public function index()
     {
-        $data = ['name' => 'Abigail', 'state' => 'CA'];
+        $chars = $this->characterService->renderList();
         
-        return response()->json($data,200);
+        return response()->json($chars,200);
     }
 
             /**
