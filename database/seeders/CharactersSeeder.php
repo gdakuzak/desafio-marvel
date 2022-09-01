@@ -24,7 +24,7 @@ class CharactersSeeder extends Seeder
         $this->command->info("===================================================");
         $this->command->info("---> Trying to access Projetc 42 Database...        ");
 
-        if(env('MARVEL_URL') != '' && env('MARVEL_PRIVATE') != '' && env('MARVEL_PUBLIC') != '') 
+        if(env('MARVEL_URL') != '' && env('MARVEL_PRIVATE') != '' && env('MARVEL_PUBLIC') != '')
         {
             $hash=md5('1'.env('MARVEL_PRIVATE').env('MARVEL_PUBLIC'));
             $t42 = Http::get(env('MARVEL_URL')."/v1/public/characters?ts=1&apikey=".env('MARVEL_PUBLIC')."&hash=".$hash."&name=Edwin%20Jarvis");
@@ -42,9 +42,13 @@ class CharactersSeeder extends Seeder
                 {
                     $response = Http::get(env('MARVEL_URL')."/v1/public/characters?ts=1&apikey=".env('MARVEL_PUBLIC')."&hash=".$hash."&name=".$choice);
                     $response = $response->collect();
+
+                    if(count($response['data']['results']) == 0) {
+                        continue;
+                    }
+
                     $character = DB::table('characters')->find($response['data']['results'][0]['id']);
-                    if($character == null)
-                    {
+                    if($character == null) {
                         $character_id = $response['data']['results'][0]['id'];
                         $insert = DB::table('characters')->insert([
                             'id' => $character_id,
@@ -54,13 +58,11 @@ class CharactersSeeder extends Seeder
                             'updated_at' => now(),
                         ]);
 
-                        foreach($response['data']['results'][0]['comics']['items'] as $item)
-                        {
+                        foreach($response['data']['results'][0]['comics']['items'] as $item) {
                             $comic_id = basename($item['resourceURI']);
                             $comic = DB::table('comics')->find($comic_id);
-                            
-                            if($comic == null)
-                            {
+
+                            if($comic == null) {
                                 DB::table('comics')->insert([
                                     'id' => $comic_id,
                                     'name' => $item['name'],
@@ -78,11 +80,10 @@ class CharactersSeeder extends Seeder
 
                         } // end foreach comics
 
-                        foreach($response['data']['results'][0]['series']['items'] as $item)
-                        {
+                        foreach($response['data']['results'][0]['series']['items'] as $item) {
                             $serie_id = basename($item['resourceURI']);
                             $serie = DB::table('series')->find($serie_id);
-                            
+
                             if($serie == null)
                             {
                                 DB::table('series')->insert([
@@ -99,14 +100,12 @@ class CharactersSeeder extends Seeder
                                 'created_at' => now(),
                                 'updated_at' => now(),
                             ]);
+                        }
 
-                        } // end foreach series
-
-                        foreach($response['data']['results'][0]['events']['items'] as $item)
-                        {
+                        foreach($response['data']['results'][0]['events']['items'] as $item) {
                             $event_id = basename($item['resourceURI']);
                             $event = DB::table('events')->find($event_id);
-                            
+
                             if($event == null)
                             {
                                 DB::table('events')->insert([
@@ -124,13 +123,13 @@ class CharactersSeeder extends Seeder
                                 'updated_at' => now(),
                             ]);
 
-                        } // end foreach events
+                        }
 
                         foreach($response['data']['results'][0]['stories']['items'] as $item)
                         {
                             $story_id = basename($item['resourceURI']);
                             $story = DB::table('stories')->find($story_id);
-                            
+
                             if($story == null)
                             {
                                 DB::table('stories')->insert([
@@ -149,11 +148,10 @@ class CharactersSeeder extends Seeder
                                 'updated_at' => now(),
                             ]);
 
-                        } // end foreach stories
-                    } //end if character
-                } //end foreach
-            } else 
-            {
+                        }
+                    }
+                }
+            } else {
                 goto insertManual;
             }
         } else {
@@ -225,8 +223,8 @@ class CharactersSeeder extends Seeder
 
             $chars = DB::table('characters')->get();
 
-            foreach($chars as $char)
-            {
+            foreach($chars as $char) {
+
                 DB::table('character_comic')->insert([
                     'character_id' => $char->id,
                     'comic_id' => 1,
