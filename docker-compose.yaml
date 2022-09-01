@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  php-fpm: &default
+    image: marvel:latest
+    build:
+      context: .
+      target: base
+    # user: "1000:1000"
+    working_dir: /application
+    volumes:
+      - .:/application
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - .:/application
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8000:80
+    depends_on:
+      - php-fpm
+      - mysql
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=marvel
+    ports:
+      - 3306:3306
+    volumes:
+      - database:/var/lib/mysql
+
+volumes:
+  database: {}
