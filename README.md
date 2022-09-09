@@ -1,7 +1,7 @@
 # API Marvel
 
 <p align="center">
-    <img alt="Made by YahP" src="https://img.shields.io/badge/Laravel-8.12-ff2d20?style=for-the-badge&logo=laravel">
+    <img alt="Made with Laravel" src="https://img.shields.io/badge/Laravel-9.27-ff2d20?style=for-the-badge&logo=laravel">
 </p>
 
 ## 📚 Histórico
@@ -84,6 +84,8 @@ Veja os endpoints na documentação específica:
 
 <a href="https://documenter.getpostman.com/view/6554571/Tz5ndzEL"><img src="https://img.shields.io/badge/Veja%20no-Postman-ef5b25?style=for-the-badge&logo=postman"></a>
 
+## Sobre o repo:
+Repositório para estudo, do que antes foi um repo para teste técnico.
 ## Sobre o Dev:
 Guilherme Makoto Sacoman Dakuzaku
 

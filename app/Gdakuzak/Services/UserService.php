@@ -44,6 +44,15 @@ class UserService implements ServiceContract
     }
 
     /**
+     * @param $email
+     * @return mixed
+     */
+    public function renderByEmail($email)
+    {
+        return $this->repository->firstByEmail($email);
+    }
+
+    /**
      * @param $id
      * @param $data
      * @return mixed

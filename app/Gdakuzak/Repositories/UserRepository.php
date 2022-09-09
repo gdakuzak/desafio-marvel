@@ -27,7 +27,7 @@ class UserRepository
     {
         return $this->model->get();
     }
-    
+
     /**
      * @param $id
      * @return mixed
@@ -35,6 +35,15 @@ class UserRepository
     public function getById($id)
     {
         return $this->model->find($id);
+    }
+
+    /**
+     * @param $email
+     * @return mixed
+     */
+    public function firstByEmail($email)
+    {
+        return $this->model->where('email',$email)->first();
     }
 
     /**
