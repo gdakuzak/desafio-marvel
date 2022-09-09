@@ -35,6 +35,15 @@ class ApplicationTest extends TestCase
                     ];
                 }
             ],
+            'call index return' => [
+                function () {
+                    return [
+                        'route' => route('characters.index'),
+                        'status' => 200,
+                        'expected' => []
+                    ];
+                }
+            ],
         ];
     }
 }
