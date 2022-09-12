@@ -23,37 +23,39 @@ class AllSystemInputSeeder extends Seeder
      */
     public function run()
     {
-        Comic::truncate();
-        Event::truncate();
-        Serie::truncate();
-        Story::truncate();
-        Character::truncate();
-        CharacterComic::truncate();
-        CharacterEvent::truncate();
-        CharacterSerie::truncate();
-        CharacterStory::truncate();
+        // Quando rodar local para testar o seeder, descomentar.
+        // Comic::truncate();
+        // Event::truncate();
+        // Serie::truncate();
+        // Story::truncate();
+        // Character::truncate();
+        // CharacterComic::truncate();
+        // CharacterEvent::truncate();
+        // CharacterSerie::truncate();
+        // CharacterStory::truncate();
 
-        Comic::factory()->count(2)->create();
-        Event::factory()->count(2)->create();
-        Serie::factory()->count(2)->create();
-        Story::factory()->count(2)->create();
-        Character::factory()->count(2)->create()->each(function ($character) {
-            $character->comics()->attach([
+        Comic::factory()->count(1)->create();
+        Event::factory()->count(1)->create();
+        Serie::factory()->count(1)->create();
+        Story::factory()->count(1)->create();
+        Character::factory()->count(1)->create()->each(function ($character) {
+
+            $character->comics()->sync([
                 'character_id' => $character->id,
                 'comic_id' => Comic::inRandomOrder()->first()->id,
             ]);
 
-            $character->events()->attach([
+            $character->events()->sync([
                 'character_id' => $character->id,
                 'event_id' => Event::inRandomOrder()->first()->id,
             ]);
 
-            $character->series()->attach([
+            $character->series()->sync([
                 'character_id' => $character->id,
                 'serie_id' => Serie::inRandomOrder()->first()->id,
             ]);
 
-            $character->stories()->attach([
+            $character->stories()->sync([
                 'character_id' => $character->id,
                 'story_id' => Serie::inRandomOrder()->first()->id,
             ]);

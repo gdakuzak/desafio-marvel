@@ -11,4 +11,5 @@ class Comic extends Model
 
     protected $table = 'comics';
     protected $fillable = ['name'];
+    protected $hidden = ['pivot'];
 }

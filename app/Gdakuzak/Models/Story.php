@@ -11,4 +11,5 @@ class Story extends Model
 
     protected $table = 'stories';
     protected $fillable = ['name','type'];
+    protected $hidden = ['pivot'];
 }

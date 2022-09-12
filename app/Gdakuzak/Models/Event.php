@@ -11,4 +11,5 @@ class Event extends Model
 
     protected $table = 'events';
     protected $fillable = ['name'];
+    protected $hidden = ['pivot'];
 }

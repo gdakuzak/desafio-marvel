@@ -11,4 +11,5 @@ class Serie extends Model
 
     protected $table = 'series';
     protected $fillable = ['name'];
+    protected $hidden = ['pivot'];
 }
