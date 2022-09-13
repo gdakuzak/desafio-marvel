@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CharactersController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\ComicsController;
+use App\Http\Controllers\StoriesController;
+use App\Http\Controllers\CharactersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,10 @@ Route::prefix('v1/public')->middleware('auth:sanctum')->group(function () {
         Route::get('/{id}/series',[CharactersController::class, 'series'])->name('characters.series.show');
         Route::get('/{id}/stories',[CharactersController::class, 'stories'])->name('characters.stories.show');
     });
+
+    Route::get('/comics',[ComicsController::class, 'index'])->name('comics.index');
+    Route::get('/comics/{id}',[ComicsController::class, 'show'])->name('comics.show');
+
+    Route::get('/stories',[StoriesController::class, 'index'])->name('stories.index');
+    Route::get('/stories/{id}',[StoriesController::class, 'show'])->name('stories.show');
 });

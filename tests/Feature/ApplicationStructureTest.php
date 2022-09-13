@@ -9,7 +9,7 @@ use Database\Seeders\AllSystemInputSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class StructureApplicationTest extends TestCase
+class ApplicationStructureTest extends TestCase
 {
     use RefreshDatabase, DatabaseMigrations;
 
@@ -43,7 +43,7 @@ class StructureApplicationTest extends TestCase
                     ];
                 }
             ],
-            'call only single row return' => [
+            'call characters return' => [
                 function () {
                     return [
                         'route' => route('characters.index'),
@@ -87,6 +87,78 @@ class StructureApplicationTest extends TestCase
                                         'created_at',
                                         'updated_at',
                                     ]
+                                ]
+                            ]
+                        ]
+                    ];
+                }
+            ],
+            'call comic structure' => [
+                function () {
+                    return [
+                        'route' => route('characters.comics.show',1),
+                        'status' => 200,
+                        'expected' => [
+                            'id',
+                            'name',
+                            'description',
+                            'comics' => [
+                                [
+                                    'id','name','created_at','updated_at'
+                                ]
+                            ]
+                        ]
+                    ];
+                }
+            ],
+            'call series structure' => [
+                function () {
+                    return [
+                        'route' => route('characters.series.show',1),
+                        'status' => 200,
+                        'expected' => [
+                            'id',
+                            'name',
+                            'description',
+                            'series' => [
+                                [
+                                    'id','name','created_at','updated_at'
+                                ]
+                            ]
+                        ]
+                    ];
+                }
+            ],
+            'call event structure' => [
+                function () {
+                    return [
+                        'route' => route('characters.events.show',1),
+                        'status' => 200,
+                        'expected' => [
+                            'id',
+                            'name',
+                            'description',
+                            'events' => [
+                                [
+                                    'id','name','created_at','updated_at'
+                                ]
+                            ]
+                        ]
+                    ];
+                }
+            ],
+            'call stories structure' => [
+                function () {
+                    return [
+                        'route' => route('characters.stories.show',1),
+                        'status' => 200,
+                        'expected' => [
+                            'id',
+                            'name',
+                            'description',
+                            'stories' => [
+                                [
+                                    'id','name','created_at','updated_at'
                                 ]
                             ]
                         ]
